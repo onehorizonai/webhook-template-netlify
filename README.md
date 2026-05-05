@@ -1,20 +1,20 @@
-# One Horizon Webhook Template for Netlify
+# One Horizon webhook template for Netlify
 
-A minimal TypeScript webhook receiver for One Horizon apps on Netlify.
+Use this repo if you want a One Horizon webhook receiver on Netlify. No Vercel, Heroku, or Cloudflare files.
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/onehorizonai/webhook-template-netlify)
 
-## What You Get
+## Included
 
 - Netlify Function at `netlify/functions/webhook.ts`
 - `/webhook` endpoint
-- Webhook key verification
-- JSON validation and 256 KB body limit
-- Retry-safe event ID handling
+- webhook key checks
+- JSON validation with a 256 KB limit
+- retry-safe event ID handling
 - Sample payloads
-- Optional SDK helper in `src/sdk.ts`
+- optional SDK helper in `src/sdk.ts`
 
-## Run Locally
+## Run locally
 
 ```bash
 yarn install
@@ -39,11 +39,11 @@ curl http://localhost:8888/webhook \
 3. Choose events.
 4. Click **Verify**.
 
-## Production Notes
+## Before production
 
 - Keep `ONE_WEBHOOK_KEY` secret.
 - Return `2xx` quickly.
-- Store processed event IDs in Redis, Postgres, or another durable store before doing side effects.
+- Store event IDs in Redis, Postgres, or another durable store before doing side effects.
 - Queue slow work. One Horizon delivery requests time out after 3 seconds.
 
 ## Checks
