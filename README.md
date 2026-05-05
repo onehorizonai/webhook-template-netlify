@@ -1,18 +1,18 @@
 # One Horizon webhooks on Netlify
 
-Clone this when your One Horizon app needs a webhook endpoint on Netlify. It is only the Netlify version: one function, one shared handler, no other host config.
+Netlify version of the One Horizon webhook starter. It has the Netlify Function, the rewrite, and no Vercel or Heroku cleanup waiting for you.
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/onehorizonai/webhook-template-netlify)
 
-## What is inside
+## Files to look at
 
 - `netlify/functions/webhook.ts`: the Netlify Function
-- `src/webhook.ts`: key check, JSON parsing, event validation, idempotency hook
+- `src/webhook.ts`: key check, JSON parsing, event validation, idempotency
 - `netlify.toml`: `/webhook` rewrite
 - `sample-payloads/`: example One Horizon events
-- `src/sdk.ts`: optional follow-up API calls
+- `src/sdk.ts`: optional API calls after receiving an event
 
-The endpoint accepts `HEAD`, `GET`, and JSON `POST` requests at `/webhook`.
+Netlify rewrites `/webhook` to `netlify/functions/webhook.ts`. The function accepts `HEAD`, `GET`, and JSON `POST`.
 
 ## Run it locally
 
@@ -32,17 +32,18 @@ curl http://localhost:8888/webhook \
   --data @sample-payloads/task-created.json
 ```
 
-## Connect One Horizon
+## Connect it to One Horizon
 
 1. Deploy this repo to Netlify.
-2. Add `ONE_WEBHOOK_KEY` in Netlify.
+2. Set `ONE_WEBHOOK_KEY` in Netlify.
 3. In One Horizon, open **Settings -> Apps**.
 4. Add the deployed `/webhook` URL.
-5. Pick events and click **Verify**.
+5. Pick the events you want.
+6. Click **Verify**.
 
-## Before you ship
+## Replace before real use
 
-The in-memory event store is for the template. Replace it with Redis, Postgres, or another durable store before doing side effects. Keep the response fast; One Horizon waits 3 seconds before timing out.
+The event store is just memory. Before this does anything real, save processed event IDs in Redis, Postgres, or another durable store. Keep the handler quick; One Horizon times out after 3 seconds.
 
 ## Checks
 
