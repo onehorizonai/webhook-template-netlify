@@ -7,12 +7,12 @@ Netlify version of the One Horizon webhook starter. It has the Netlify Function,
 ## Files to look at
 
 - `netlify/functions/webhook.ts`: the Netlify Function
-- `src/webhook.ts`: key check, JSON parsing, event validation, idempotency
+- `src/webhook.ts`: key check, CloudEvents JSON parsing, event validation, idempotency
 - `netlify.toml`: `/webhook` rewrite
 - `sample-payloads/`: example One Horizon events
 - `src/sdk.ts`: optional API calls after receiving an event
 
-Netlify rewrites `/webhook` to `netlify/functions/webhook.ts`. The function accepts `HEAD`, `GET`, and JSON `POST`.
+Netlify rewrites `/webhook` to `netlify/functions/webhook.ts`. The function accepts `HEAD`, `GET`, and CloudEvents JSON `POST`.
 
 ## One Horizon links
 
@@ -36,7 +36,7 @@ yarn dev
 ```bash
 curl http://localhost:8888/webhook \
   -X POST \
-  -H "content-type: application/json" \
+  -H "content-type: application/cloudevents+json; charset=utf-8" \
   -H "x-one-webhook-key: paste-one-horizon-webhook-key-here" \
   -H "x-one-event-id: evt_task_created" \
   -H "x-one-event-type: task.created" \
