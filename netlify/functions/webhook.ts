@@ -1,7 +1,13 @@
-import type { Handler } from '@netlify/functions'
 import { handleWebhook } from '../../src/webhook.js'
 
-export const handler: Handler = async (event) => {
+interface NetlifyEvent {
+  body: string | null
+  headers: Record<string, string>
+  httpMethod: string
+  isBase64Encoded: boolean
+}
+
+export const handler = async (event: NetlifyEvent) => {
   const result = await handleWebhook({
     method: event.httpMethod,
     headers: event.headers,
