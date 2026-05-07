@@ -1,18 +1,18 @@
-# One Horizon webhooks on Netlify
+# One Horizon webhook receiver for Netlify
 
-Netlify version of the One Horizon webhook starter. It has the Netlify Function, the rewrite, and no Vercel or Heroku cleanup waiting for you.
+A small Netlify Function that receives One Horizon app webhooks. It uses the One Horizon SDK types, checks the webhook key, reads the raw CloudEvents JSON body, and returns quickly.
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/onehorizonai/webhook-template-netlify)
 
 ## Files to look at
 
 - `netlify/functions/webhook.ts`: the Netlify Function
-- `src/webhook.ts`: key check, CloudEvents JSON parsing, event validation, idempotency
-- `netlify.toml`: `/webhook` rewrite
+- `src/webhook.ts`: key check, CloudEvents JSON parsing, SDK event typing, idempotency
+- `netlify.toml`: build settings and deploy-button environment fields
 - `sample-payloads/`: example One Horizon events
 - `src/sdk.ts`: optional API calls after receiving an event
 
-Netlify rewrites `/webhook` to `netlify/functions/webhook.ts`. The function accepts `HEAD`, `GET`, and CloudEvents JSON `POST`.
+The function is mounted at `/webhook` and accepts `HEAD`, `GET`, and CloudEvents JSON `POST`.
 
 ## One Horizon links
 
@@ -22,11 +22,10 @@ Netlify rewrites `/webhook` to `netlify/functions/webhook.ts`. The function acce
 - [JavaScript SDK](https://www.npmjs.com/package/@onehorizon/sdk-js)
 
 ```bash
-npm i @onehorizon/sdk-js
+npm i @onehorizon/sdk-js@latest
 ```
 
-Webhook event and payload types come from `@onehorizon/sdk-js`. `src/types.ts`
-only keeps local adapter types for headers, logging, and responses.
+Webhook event and payload types come from `@onehorizon/sdk-js`.
 
 ## Run it locally
 
@@ -57,7 +56,7 @@ curl http://localhost:8888/webhook \
 5. Pick the events you want.
 6. Click **Verify**.
 
-## Replace before real use
+## Before real use
 
 The event store is just memory. Before this does anything real, save processed event IDs in Redis, Postgres, or another durable store. Keep the handler quick; One Horizon times out after 3 seconds.
 

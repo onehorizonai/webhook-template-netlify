@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest'
 import { WebhookEventToJSON } from '@onehorizon/sdk-js'
 import type { WebhookEvent } from '@onehorizon/sdk-js'
-import { createMemoryEventStore } from '../src/idempotency.js'
-import { handleWebhook } from '../src/webhook.js'
+import netlifyWebhook from '../netlify/functions/webhook.js'
+import { createMemoryEventStore, handleWebhook } from '../src/webhook.js'
 
 const payload = WebhookEventToJSON({
   specversion: '1.0',
@@ -221,5 +221,24 @@ describe('handleWebhook', () => {
     })
 
     expect(response.status).toBe(500)
+  })
+})
+
+describe('Netlify webhook adapter', () => {
+  it('reads raw CloudEvents JSON request bodies', async () => {
+    const response = await netlifyWebhook(
+      new Request('https://example.com/webhook', {
+        method: 'POST',
+        headers: cloudEventsHeaders,
+        body: JSON.stringify(payload)
+      })
+    )
+
+    expect(response.status).toBe(200)
+    await expect(response.json()).resolves.toMatchObject({
+      ok: true,
+      id: 'evt_123',
+      type: 'task.created'
+    })
   })
 })

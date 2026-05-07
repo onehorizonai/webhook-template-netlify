@@ -12,5 +12,5 @@
     "outDir": "dist",
     "rootDir": "."
   },
-  "include": ["netlify/**/*.ts", "src/**/*.ts", "test/**/*.ts"]
+  "include": ["netlify/**/*.ts", "src/**/*.ts"]
 }

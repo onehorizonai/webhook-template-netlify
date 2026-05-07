@@ -2,11 +2,6 @@
   command = "yarn build"
   functions = "netlify/functions"
 
-[[redirects]]
-  from = "/webhook"
-  to = "/.netlify/functions/webhook"
-  status = 200
-
 [template.environment]
   ONE_WEBHOOK_KEY = "Paste the verification key from your One Horizon webhook settings"
   ONE_API_KEY = "Optional API key for fetching related One Horizon data"
