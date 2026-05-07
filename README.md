@@ -52,7 +52,7 @@ curl http://localhost:8888/webhook \
 
 1. Deploy this repo to Netlify.
 2. Set `ONE_WEBHOOK_KEY` in Netlify.
-3. In One Horizon, open **Settings -> Apps**.
+3. In One Horizon, open <a href="https://onehorizon.ai/app/my/settings/apps" rel="nofollow">Settings -> Apps</a>.
 4. Add the deployed `/webhook` URL.
 5. Pick the events you want.
 6. Click **Verify**.
