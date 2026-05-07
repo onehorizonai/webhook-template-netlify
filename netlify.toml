@@ -1,6 +1,7 @@
 [build]
   command = "yarn build"
   functions = "netlify/functions"
+  publish = "public"
 
 [template.environment]
   ONE_WEBHOOK_KEY = "Paste the verification key from your One Horizon webhook settings"

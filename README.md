@@ -7,6 +7,7 @@ A small Netlify Function that receives One Horizon app webhooks. It uses the One
 ## Files to look at
 
 - `netlify/functions/webhook.ts`: the Netlify Function
+- `public/index.html`: the root deployment status page
 - `src/webhook.ts`: key check, CloudEvents JSON parsing, SDK event typing, idempotency
 - `netlify.toml`: build settings and deploy-button environment fields
 - `sample-payloads/`: example One Horizon events
