@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@onehorizon/sdk-js": "^2.0.0"
+    "@onehorizon/sdk-js": "latest"
   },
   "devDependencies": {
     "@netlify/functions": "^5.2.0",
