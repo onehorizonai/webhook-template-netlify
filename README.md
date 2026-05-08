@@ -11,7 +11,7 @@ A small Netlify Function that receives One Horizon app webhooks. It uses the One
 - `src/webhook.ts`: key check, CloudEvents JSON parsing, SDK event typing, idempotency
 - `netlify.toml`: build settings and deploy-button environment fields
 - `sample-payloads/`: example One Horizon events
-- `src/sdk.ts`: optional follow-up call that loads the first document attached to the task
+- `src/sdk.ts`: optional `loadAttachedDocument` example using the One Horizon SDK
 
 The function is mounted at `/webhook` and accepts `HEAD`, `GET`, and CloudEvents JSON `POST`.
 

@@ -5,4 +5,4 @@
 
 [template.environment]
   ONE_WEBHOOK_KEY = "Paste the verification key from your One Horizon webhook settings"
-  ONE_API_KEY = "Optional API key for fetching related One Horizon data"
+  ONE_API_KEY = "Optional API key for SDK follow-up calls"
